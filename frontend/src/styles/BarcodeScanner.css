@@ -1,0 +1,120 @@
+.barcode-scanner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.barcode-scanner h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.scanner-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.barcode-input {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.barcode-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.scan-btn {
+  padding: 0.75rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scan-btn:hover:not(:disabled) {
+  background-color: #5568d3;
+}
+
+.scan-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.recent-scans {
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}
+
+.recent-scans h3 {
+  margin: 0 0 1rem 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.recent-scans ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.recent-item:hover {
+  background-color: #f0f0f0;
+  border-color: #667eea;
+}
+
+.product-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.product-barcode {
+  color: #999;
+  font-size: 0.85rem;
+}

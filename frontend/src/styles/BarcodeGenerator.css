@@ -1,0 +1,141 @@
+.barcode-generator {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.barcode-generator h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.generator-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-group label {
+  color: #555;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.control-group input,
+.control-group select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.button-group button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.button-group .btn-primary {
+  background-color: #667eea;
+  color: white;
+}
+
+.button-group .btn-primary:hover {
+  background-color: #5568d3;
+}
+
+.button-group .btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.button-group .btn-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+.barcode-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 2px dashed #ddd;
+}
+
+.barcode-display svg {
+  max-width: 100%;
+}
+
+.barcode-actions {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.barcode-actions button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  background-color: #667eea;
+  color: white;
+}
+
+.barcode-actions button:hover {
+  background-color: #5568d3;
+}
+
+@media (max-width: 768px) {
+  .barcode-generator {
+    padding: 1rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .barcode-actions {
+    flex-direction: column;
+  }
+
+  .barcode-actions button {
+    width: 100%;
+  }
+}
