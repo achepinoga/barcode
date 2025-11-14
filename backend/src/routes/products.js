@@ -246,14 +246,14 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE /api/products/:id - Delete product (soft delete by marking as inactive)
+// DELETE /api/products/:id - Delete product (hard delete - permanent removal)
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
     const { data, error } = await supabase
       .from('products')
-      .update({ is_active: false })
+      .delete()
       .eq('id', id)
       .select()
       .single();
