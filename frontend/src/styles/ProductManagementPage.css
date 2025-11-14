@@ -211,6 +211,7 @@
 .products-table td {
   padding: 1rem;
   border-bottom: 1px solid #eee;
+  color: #333;
 }
 
 .products-table tr {
