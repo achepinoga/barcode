@@ -7,8 +7,8 @@ export default function ProductDetails({ product, onClose }) {
   const username = useAuthStore((state) => state.user?.username);
   const [formData, setFormData] = useState({
     name: product.name || '',
-    price: product.price || 0,
-    stock: product.stock || 0,
+    price: product.price !== undefined && product.price !== null ? product.price : '',
+    stock: product.stock !== undefined && product.stock !== null ? product.stock : '',
     category: product.category || '',
     description: product.description || '',
     sku: product.sku || ''
@@ -26,8 +26,12 @@ export default function ProductDetails({ product, onClose }) {
     const { name, value } = e.target;
     let newValue = value;
     if (name === 'price' || name === 'stock') {
-      newValue = value === '' ? 0 : parseFloat(value);
-      if (isNaN(newValue)) newValue = 0;
+      if (value === '') {
+        newValue = '';
+      } else {
+        newValue = parseFloat(value);
+        if (isNaN(newValue)) newValue = '';
+      }
     }
     setFormData((prev) => ({
       ...prev,
