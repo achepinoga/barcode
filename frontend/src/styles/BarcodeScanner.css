@@ -1,0 +1,204 @@
+@keyframes scannerPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+  }
+}
+
+@keyframes successFlash {
+  0% {
+    border-color: var(--color-success);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    border-color: var(--color-success);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    border-color: var(--color-border);
+    box-shadow: none;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.barcode-scanner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.barcode-scanner h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.barcode-scanner h2::before {
+  content: '🔍';
+  font-size: 1.5rem;
+}
+
+.scanner-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.3px;
+}
+
+.barcode-input {
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  font-size: 1.125rem;
+  font-family: var(--font-mono);
+  transition: all var(--transition-base);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.barcode-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  animation: scannerPulse 1.5s ease-in-out;
+}
+
+.barcode-input.success {
+  animation: successFlash 0.6s ease-out;
+}
+
+.scan-btn {
+  padding: 1rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.scan-btn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.scan-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.scan-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: var(--color-danger);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  border-left: 4px solid var(--color-danger);
+  animation: slideDown 0.3s ease-out;
+}
+
+.recent-scans {
+  border-top: 2px solid var(--color-gray-200);
+  padding-top: var(--space-xl);
+  animation: slideDown 0.4s ease-out 0.2s both;
+}
+
+.recent-scans h3 {
+  margin: 0 0 var(--space-md) 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.recent-scans h3::before {
+  content: '⏱️';
+  font-size: 1rem;
+}
+
+.recent-scans ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background-color: var(--color-gray-50);
+  border: 2px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9375rem;
+  transition: all var(--transition-base);
+}
+
+.recent-item:hover {
+  background-color: var(--color-surface);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.recent-item:active {
+  transform: translateX(2px);
+}
+
+.product-name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.product-barcode {
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+  background-color: rgba(37, 99, 235, 0.1);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+}

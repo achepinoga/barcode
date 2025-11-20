@@ -1,0 +1,127 @@
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatPulse {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 60px);
+  background-color: var(--color-background);
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  overflow: hidden;
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.left-panel {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  overflow-y: auto;
+  animation: slideInLeft 0.4s ease-out;
+  transition: all var(--transition-base);
+}
+
+.left-panel:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.right-panel {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  overflow-y: auto;
+  animation: slideInRight 0.4s ease-out;
+  transition: all var(--transition-base);
+}
+
+.right-panel:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  gap: var(--space-lg);
+}
+
+.empty-state p {
+  animation: floatPulse 3s ease-in-out infinite;
+  font-weight: 500;
+  text-align: center;
+}
+
+.empty-state::before {
+  content: '📦';
+  font-size: 4rem;
+  opacity: 0.3;
+  animation: floatPulse 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .dashboard-content {
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .left-panel,
+  .right-panel {
+    animation: slideInLeft 0.4s ease-out;
+  }
+
+  .header-right {
+    gap: var(--space-md);
+  }
+
+  .user-info {
+    display: none;
+  }
+}
