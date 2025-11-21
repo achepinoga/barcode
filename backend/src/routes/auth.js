@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 // Hardcoded user credentials
@@ -10,15 +11,29 @@ const VALID_CREDENTIALS = {
   'alex@chepinoga.com': 'SecurePass2024!'
 };
 
+// JWT Secret - in production, this should be in environment variables
+const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-key-change-this-in-production';
+
 // POST /api/auth/login
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
 
   // Validate credentials
   if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
+    // Generate JWT token
+    const token = jwt.sign(
+      {
+        username: username,
+        role: 'staff'
+      },
+      JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
     return res.json({
       success: true,
       message: 'Login successful',
+      token: token,
       user: {
         username: username,
         role: 'staff'

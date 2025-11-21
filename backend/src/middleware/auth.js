@@ -1,3 +1,8 @@
+const jwt = require('jsonwebtoken');
+
+// JWT Secret - must match the one in auth.js
+const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-key-change-this-in-production';
+
 // Authentication middleware
 const authenticateRequest = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -10,28 +15,26 @@ const authenticateRequest = (req, res, next) => {
     });
   }
 
-  // Extract username from Bearer token
-  const username = authHeader.substring(7); // Remove 'Bearer ' prefix
+  // Extract token from Bearer header
+  const token = authHeader.substring(7); // Remove 'Bearer ' prefix
 
-  // For now, validate that username matches one of the known users
-  const VALID_USERS = {
-    'justin.maas@student.fontys.nl': true,
-    'e.chapa@student.fontys.nl': true,
-    'r.cozma@student.fontys.nl': true,
-    'stefan@student.fontys.nl': true,
-    'alex@chepinoga.com': true
-  };
+  try {
+    // Verify and decode the JWT token
+    const decoded = jwt.verify(token, JWT_SECRET);
 
-  if (!VALID_USERS[username]) {
+    // Attach user info from token to request
+    req.user = {
+      username: decoded.username,
+      role: decoded.role
+    };
+
+    next();
+  } catch (err) {
     return res.status(401).json({
       success: false,
-      message: 'Unauthorized: Invalid user'
+      message: 'Unauthorized: Invalid or expired token'
     });
   }
-
-  // Attach username to request for logging purposes
-  req.user = { username };
-  next();
 };
 
 module.exports = { authenticateRequest };
