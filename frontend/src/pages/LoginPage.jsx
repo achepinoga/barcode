@@ -21,6 +21,7 @@ export default function LoginPage() {
       const response = await authAPI.login(username, password);
       if (response.data.success) {
         login(response.data.user);
+        localStorage.setItem('username', username);
         navigate('/dashboard');
       }
     } catch (err) {

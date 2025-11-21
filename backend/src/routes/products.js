@@ -2,11 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const { createClient } = require('@supabase/supabase-js');
+const { authenticateRequest } = require('../middleware/auth');
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
+
+// Apply authentication middleware to all routes
+router.use(authenticateRequest);
 
 // GET /api/products - Get all products
 router.get('/', async (req, res) => {
@@ -101,7 +105,8 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, price, stock, category, description, image_url, sku, username } = req.body;
+    const { name, price, stock, category, description, image_url, sku } = req.body;
+    const username = req.user.username;
 
     // Validation
     if (price !== undefined && price < 0) {

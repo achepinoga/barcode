@@ -10,6 +10,7 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
+    localStorage.removeItem('username');
     navigate('/login');
   };
 

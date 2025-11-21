@@ -2,11 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const { createClient } = require('@supabase/supabase-js');
+const { authenticateRequest } = require('../middleware/auth');
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
+
+// Apply authentication middleware to all routes
+router.use(authenticateRequest);
 
 // GET /api/inventory/logs - Get all inventory logs
 router.get('/logs', async (req, res) => {

@@ -9,6 +9,20 @@ const api = axios.create({
   }
 });
 
+// Add authentication token to requests
+api.interceptors.request.use(
+  (config) => {
+    const username = localStorage.getItem('username');
+    if (username) {
+      config.headers.Authorization = `Bearer ${username}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // Auth endpoints
 export const authAPI = {
   login: (username, password) =>
