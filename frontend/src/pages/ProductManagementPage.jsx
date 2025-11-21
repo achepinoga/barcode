@@ -153,7 +153,7 @@ export default function ProductManagementPage() {
                   name="barcode"
                   value={formData.barcode}
                   onChange={handleInputChange}
-                  placeholder="e.g., 1234567890"
+                  placeholder="Enter barcode"
                   required
                   disabled={isSaving}
                 />
@@ -166,7 +166,7 @@ export default function ProductManagementPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="e.g., Milk 1L"
+                  placeholder="Enter product name"
                   required
                   disabled={isSaving}
                 />
@@ -182,7 +182,7 @@ export default function ProductManagementPage() {
                   name="category"
                   value={formData.category}
                   onChange={handleInputChange}
-                  placeholder="e.g., Dairy"
+                  placeholder="Enter category"
                   disabled={isSaving}
                 />
               </div>
@@ -194,7 +194,7 @@ export default function ProductManagementPage() {
                   name="sku"
                   value={formData.sku}
                   onChange={handleInputChange}
-                  placeholder="e.g., MILK-001"
+                  placeholder="Enter SKU"
                   disabled={isSaving}
                 />
               </div>
