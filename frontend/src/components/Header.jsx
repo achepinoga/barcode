@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
+import { authAPI } from '../services/api';
 import '../styles/Header.css';
 
 export default function Header() {
@@ -8,10 +9,18 @@ export default function Header() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
-  const handleLogout = () => {
-    logout();
-    localStorage.removeItem('token');
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      // Call backend logout to clear cookie
+      await authAPI.logout();
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      // Clear local state regardless of API call result
+      logout();
+      localStorage.removeItem('token');
+      navigate('/login');
+    }
   };
 
   const isActive = (path) => location.pathname === path;

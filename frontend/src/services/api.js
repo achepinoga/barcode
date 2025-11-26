@@ -6,10 +6,11 @@ const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  withCredentials: true
 });
 
-// Add authentication token to requests
+// Adds authentication token to requests
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -23,10 +24,23 @@ api.interceptors.request.use(
   }
 );
 
+// Response interception for debugging
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.error('API Error:', error.response?.data || error.message);
+    return Promise.reject(error);
+  }
+);
+
 // Auth endpoints
 export const authAPI = {
   login: (username, password) =>
-    api.post('/auth/login', { username, password })
+    api.post('/auth/login', { username, password }),
+  verify: () => api.get('/auth/verify'),
+  logout: () => api.post('/auth/logout')
 };
 
 // Product endpoints

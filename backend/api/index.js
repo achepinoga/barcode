@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
@@ -11,8 +12,12 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
-// Middleware
-app.use(cors());
+// Middleware - IMPORTANT: Order matters!
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true // This allows cookies to be sent/received
+}));
+app.use(cookieParser()); // Must come before routes
 app.use(express.json());
 
 // Health check endpoint

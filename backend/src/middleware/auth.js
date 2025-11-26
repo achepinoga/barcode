@@ -1,22 +1,27 @@
 const jwt = require('jsonwebtoken');
 
-// JWT Secret - must match the one in auth.js
+// JWT Secret. Must match the one in auth.js
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-key-change-this-in-production';
 
 // Authentication middleware
 const authenticateRequest = (req, res, next) => {
+  // Try to get token from Authorization header first, then from cookies
+  let token = null;
+  
   const authHeader = req.headers.authorization;
-
-  // Check if Authorization header exists
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({
-      success: false,
-      message: 'Unauthorized: Missing or invalid authentication token'
-    });
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.substring(7); // Remove 'Bearer ' prefix
+  } else if (req.cookies && req.cookies.auth_token) {
+    token = req.cookies.auth_token;
   }
 
-  // Extract token from Bearer header
-  const token = authHeader.substring(7); // Remove 'Bearer ' prefix
+  // Check if token exists
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized: Missing authentication token'
+    });
+  }
 
   try {
     // Verify and decode the JWT token
